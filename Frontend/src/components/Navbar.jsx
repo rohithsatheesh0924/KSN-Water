@@ -6,13 +6,14 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const menuRef = useRef(null);
 
+  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // ✅ FIXED: Use 'click' instead of 'mousedown' for mobile compatibility
+  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -22,6 +23,18 @@ const Navbar = () => {
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
   }, []);
+
+  // 🔒 Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, [isOpen]);
 
   const navLinks = [
     { name: "Home", href: "#home" },
@@ -47,18 +60,18 @@ const Navbar = () => {
           <a href="#home" className="flex items-center group">
             <img 
               src="Logo.jpeg" 
-              alt="KSN Logo" 
+              alt="Aegir Logo" 
               className="w-14 sm:w-16 lg:w-20 h-9 sm:h-10 lg:h-12 object-contain rounded-2xl shadow-xl 
                        transition-all duration-500 group-hover:scale-110 group-hover:shadow-2xl 
                        group-active:scale-105 bg-white/80 p-1.5 backdrop-blur-sm"
               onError={(e) => {
-                e.target.src = 'https://via.placeholder.com/96x48?text=KSN&color=f97316&font-size=20&text-color=white';
+                e.target.src = 'https://via.placeholder.com/96x48?text=A&color=f97316&font-size=20&text-color=white';
                 e.target.className += ' border-2 border-orange-400/60 bg-gradient-to-br from-orange-50/80';
               }}
             />
           </a>
 
-          {/* Desktop Nav */}
+          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1.5 lg:space-x-8">
             {navLinks.map((link) => (
               <a 
@@ -76,8 +89,8 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Desktop CTA */}
-          <div className="hidden xl:flex">
+          {/* ✅ CTA Button: Visible from lg (1024px) and up — effectively "up to 1100px+" */}
+          <div className="hidden lg:flex">
             <button className="
               bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold 
               px-8 py-3 rounded-2xl shadow-xl shadow-orange-300/50 text-sm
@@ -88,7 +101,7 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Mobile Toggle */}
+          {/* Mobile Menu Toggle */}
           <button 
             className="
               lg:hidden p-2.5 rounded-xl bg-white/80 backdrop-blur-xl shadow-md
@@ -97,10 +110,10 @@ const Navbar = () => {
               transition-all duration-300
             "
             onClick={(e) => {
-              e.stopPropagation(); // Prevent triggering outside click
+              e.stopPropagation();
               setIsOpen(!isOpen);
             }}
-            aria-label="Toggle menu"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isOpen ? (
@@ -113,12 +126,12 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu — Only rendered when open */}
       {isOpen && (
         <div 
           ref={menuRef}
-          className="fixed inset-0 z-40 bg-gradient-to-b from-white via-white/95 to-orange-50/80 backdrop-blur-xl lg:hidden flex flex-col pt-16 pb-8 px-4 sm:px-6"
-          onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+          className="fixed inset-0 z-[55] bg-gradient-to-b from-white via-white/95 to-orange-50/80 backdrop-blur-xl lg:hidden flex flex-col pt-16 pb-8 px-4 sm:px-6"
+          onClick={(e) => e.stopPropagation()}
         >
           {/* Close Button */}
           <div className="flex justify-end mb-6">
@@ -133,7 +146,7 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Links */}
+          {/* Navigation Links */}
           <div className="space-y-4 mb-10">
             {navLinks.map((link) => (
               <a
@@ -147,7 +160,7 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* CTA */}
+          {/* Mobile CTA */}
           <div className="mt-auto">
             <button 
               onClick={() => setIsOpen(false)}
