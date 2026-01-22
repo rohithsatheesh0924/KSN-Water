@@ -19,7 +19,7 @@ const Home = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 text-center mb-4">
             Take Control <br /> of your <span className="text-orange-500">Water Usage</span>
           </h1>
-          <p className="text-gray-600 text-center mb-8">Aegir Water Management Platform</p>
+          <p className="text-gray-600 text-center mb-8">KSN Water Management Platform</p>
 
           {/* Feature Icons Row */}
           <div className="flex flex-wrap justify-center gap-8 mb-12 text-sm text-gray-600">
@@ -310,7 +310,7 @@ const Home = () => {
               </div>
 
               <p className="text-xs text-gray-500 mt-4">
-                By clicking “Request Quote” you agree to receive a callback from Aegir
+                By clicking “Request Quote” you agree to receive a callback from KSN
               </p>
 
               <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-full mt-4 transition">
