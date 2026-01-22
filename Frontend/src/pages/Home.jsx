@@ -326,7 +326,7 @@ const Home = () => {
   <div className="container mx-auto max-w-6xl">
     <div className="text-center mb-16">
       <span className="bg-orange-50 text-orange-600 text-[10px] px-3 py-1 rounded-full font-bold tracking-widest mb-4 inline-block uppercase">TESTIMONIALS</span>
-      <h2 className="text-4xl font-bold text-gray-900 mt-2">Aegir makes you happier :)</h2>
+      <h2 className="text-4xl font-bold text-gray-900 mt-2">KSN makes you happier :)</h2>
     </div>
 
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
