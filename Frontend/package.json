@@ -12,14 +12,16 @@
 
   "scripts": {
     "dev": "vite",
-    "build": "npx vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
 
   "dependencies": {
     "@heroicons/react": "^2.2.0",
-    "@react-three/drei": "^10.7.6",
-    "@react-three/fiber": "^9.4.0",
+
+    "@react-three/drei": "9.88.13",
+    "@react-three/fiber": "8.15.19",
+
     "@splinetool/react-spline": "^4.1.0",
     "@studio-freight/lenis": "^1.0.42",
     "aos": "^2.3.4",
@@ -30,8 +32,10 @@
     "lucide-react": "^0.554.0",
     "ogl": "^1.0.11",
     "postprocessing": "^6.38.2",
+
     "react": "18.3.1",
     "react-dom": "18.3.1",
+
     "react-countup": "^6.5.3",
     "react-icons": "^5.5.0",
     "react-intersection-observer": "^10.0.0",
